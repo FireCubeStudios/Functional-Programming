@@ -30,8 +30,18 @@ let rec fib n: int =
 let dup s : string = s + s
 
 // 1.6
-let rec dupn s n = 
-    match n with
-    | 0 -> s
-    | n when n > 0 -> 
-    | _ -> failwith "n was negative"
+let rec dupn (s: string) (n: int) = 
+    if n > 0 then 
+        s + dupn s (n - 1)
+    else
+        ""
+
+// 1.7
+let rec bin = 
+    function
+    | (n, 0) -> 1
+    | (n, k) when n = k -> 1
+    | (n, k) when n = 0 || n < k -> failwith "Something went wrong";
+    | (n, k) -> bin(n - 1, k - 1) + bin(n - 1, k);;
+
+// 1.8
