@@ -53,4 +53,10 @@ let rec readInt () =
     match tryParseInt input with
     | (true, n) -> n
     | (false, n) -> printfn "%s is not an integer" input // Fixes bug "The type 'string' is not compatible with the type 'Printf.TextWriterFormat<'a>'"
-                    readInt ()
+                    readInt ();;
+
+// 1.9
+let timediff (hh, mm) (hh2, mm2) = ((hh2 - hh) * 60) + (mm2 - mm)
+
+// 1.10
+let minutes (hh, mm) = timediff (0, 0) (hh, mm)
