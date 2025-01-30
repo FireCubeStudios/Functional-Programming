@@ -6,20 +6,20 @@
 *)
 
 // 1.1
-let sqr x : int = x * x;
+let sqr x = x * x;
 
 // 1.2
-let pow x n : float = System.Math.Pow(x, n)
+let pow x n = System.Math.Pow(x, n)
 
 // 1.3
-let rec sum n : int = 
+let rec sum n = 
     match n with
     | 0 -> 0
     | n when n > 0 -> n + sum(n - 1)
     | _ -> failwith "Number was negative";;
 
 // 1.4
-let rec fib n: int =
+let rec fib n =
     match n with
     | 0 -> 0
     | 1 -> 1
@@ -45,3 +45,12 @@ let rec bin =
     | (n, k) -> bin(n - 1, k - 1) + bin(n - 1, k);;
 
 // 1.8
+let readFromConsole () = System.Console.ReadLine().Trim()
+let tryParseInt (str : string) = System.Int32.TryParse str
+
+let rec readInt () = 
+    let input = readFromConsole()
+    match tryParseInt input with
+    | (true, n) -> n
+    | (false, n) -> printfn "%s is not an integer" input // Fixes bug "The type 'string' is not compatible with the type 'Printf.TextWriterFormat<'a>'"
+                    readInt ()
