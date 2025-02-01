@@ -60,3 +60,17 @@ let timediff (hh, mm) (hh2, mm2) = ((hh2 - hh) * 60) + (mm2 - mm)
 
 // 1.10
 let minutes (hh, mm) = timediff (0, 0) (hh, mm)
+
+// 1.11
+let curry f x y = f (x, y);
+
+let uncurry f (x, y) = f x y;
+
+(*
+    Usage:
+    curry (fun (x, y) -> x + y) 4 6
+    uncurry (fun x y -> x + y) (5, 3)
+
+    Info:
+    https://stackoverflow.com/questions/44066/pass-functions-in-f
+*)
