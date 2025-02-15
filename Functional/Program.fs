@@ -54,8 +54,12 @@ let (|/|) = fun ((a, b): complex) ((c, d): complex) ->
 // 2.7
 
 // 2.8
-
-let ack (m ,n) = 
+let rec ack = 
+    function 
+    | (m, n) when m = 0 -> n + 1
+    | (m, n) when m > 0 && n = 0 -> ack(m - 1, 1)
+    | (m, n) when m > 0 && n > 0 -> ack(m - 1, ack(m, n - 1))
+    | _ -> failwith "Something went wrong";
 
 
 (*
