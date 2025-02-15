@@ -1,108 +1,56 @@
 ﻿(*
-    Assignment 2 exercises
-    2.1 - 2.8 easy
+    Assignment 3 exercises
+    3.1 - 3.8 easy
+    3.9 - 3.11 medium
+    3.12 - 3.14 hard
 *)
 
-// 2.1
-let rec downto1 n = if n > 0 then n::downto1(n - 1) else []
+// 3.1
+let add5 x = x + 5
 
-let rec downto2 n = 
+let mul3 x = x * 3
+
+let add5mul3 x = x |> add5 |> mul3
+
+let add5mul3_2 = add5 >> mul3
+
+// 3.2
+(* 
+    Usage: add5_2 (fun x -> x * 3) 7 
+    outputs: int = 26 
+*)
+let add5_2 f x = f x + 5
+
+let mul3_2 f x = f x * 3
+
+// 3.3
+let downto4 f n e = 
     match n with
-    | n when n <= 0 -> []
-    | n -> n::downto2(n - 1)
+    | n when n > 0 -> f (n - 1)(f n e)
+    | n -> e;;
 
-let downto3 =
-    function
-    | n when n <= 0 -> []
-    | n -> n::downto2(n - 1)
+let fac n = downto4 (fun x acc -> x * acc) n 1 // Using accumulator (Folds concept)
 
-// 2.2
-let rec removeOddIdx xs = 
-    match xs with
-    | [] -> []
-    | x::y::xs -> x::(removeOddIdx xs)
-    | x::xs -> x::(removeOddIdx xs);; 
+let range n = downto4 (fun n acc -> n::acc) (n - 1) [];; // output rang e9 is [7, 8]
 
-// 2.3
-let rec combinePair xs = 
-    match xs with
-    | [] -> []
-    | x::y::xs -> (x, y)::(combinePair xs)
-    | x::xs -> [];; // This ignores the last item in an odd list
+// 3.4
 
-// 2.4
-type complex = float * float
+// 3.5
 
-let mkComplex a b = complex(a, b)
+// 3.6
 
-(* 
-    Could not make the following functions exactly complex -> ...
-    instead F# shows it as float * float -> ...
+// 3.7 
 
-    Also for the infix operators the type is not needed and I can do 
-    let (|+|) = fun (a, b) (c, d) -> complex(a + c, b + d)
-*)
-let complexToPair ((a, b): complex) = (a, b) 
+// 3.8
 
-let (|+|) = fun ((a, b): complex) ((c, d): complex) -> complex(a + c, b + d)
+// 3.9
 
-let (|*|) = fun ((a, b): complex) ((c, d): complex) -> complex((a * c) - (b * d), (b * c) + (a * d))
+// 3.10
 
-let (|-|) = fun ((a, b): complex) ((c, d): complex) -> (a, b) |+| (-c, -d)
+// 3.11
 
-let (|/|) = fun ((a, b): complex) ((c, d): complex) -> 
-    let divisor a b = (a * a) + (b * b)
-    let inverse a b = ((a / divisor a b), (-b / divisor a b))
-    if c = 0 && d = 0 then 
-        failwith "Can't divide by 0" 
-    else 
-        (a, b) |*| inverse c d
+// 3.12
 
-(*
-    Usage:
-    let x = complex(a, b)
-    let y = complex(c, d)
+// 3.13
 
-    x |+| y // Addition
-    x |-| y // Subtraction...
-    x |*| y // Multiplication
-    x |/| y // Division
-*)
-
-// 2.5
-let explode1 (s: string) = List.ofArray(s.ToCharArray())
-
-let rec explode2 (s: string): char list = 
-    if s.Length = 0 then []
-    else s.[0]::(explode2 (s.Remove(0, 1)))
-
-// 2.6
-let rec implode (cs: char list) =
-    match cs with 
-    | [] -> ""
-    | c::cs -> c.ToString() + implode cs;;
-
-let rec implodeRev (cs: char list) = 
-    match cs with 
-    | [] -> ""
-    | c::cs ->  implodeRev cs + c.ToString();;
-
-// 2.7
-(* 
-    Unable to find a way to avoid using for loop with pipeline/function composition 
-    in one line without higher order functions
-
-    Unless I need to make another function char: list -> char: list 
-    outside of this function to do it recursively?
-*)
-let toUpper s = s |> explode2 |> fun cs -> implode [for c in cs -> System.Char.ToUpper c]
-
-let toUpper2 = fun s -> explode2 >> fun cs -> implode [for c in cs -> System.Char.ToUpper c] // Function composition bonus
-
-// 2.8
-let rec ack = 
-    function 
-    | (m, n) when m = 0 -> n + 1
-    | (m, n) when m > 0 && n = 0 -> ack(m - 1, 1)
-    | (m, n) when m > 0 && n > 0 -> ack(m - 1, ack(m, n - 1))
-    | _ -> failwith "Something went wrong";;
+// 3.14
