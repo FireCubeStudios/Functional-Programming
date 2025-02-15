@@ -7,7 +7,7 @@
     *)
 
     // 1.1
-    let sqr x = x * x;
+    let sqr x = x * x
 
     // 1.2
     let pow x n = System.Math.Pow(x, n)
