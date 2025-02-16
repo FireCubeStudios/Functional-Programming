@@ -24,18 +24,25 @@ let add5_2 f x = f x + 5
 let mul3_2 f x = f x * 3
 
 // 3.3
-let downto4 f n e = 
+let rec downto4 f n e = 
     match n with
-    | n when n > 0 -> f (n - 1)(f n e)
+    | n when n > 0 -> downto4 f (n - 1) (f n e)
     | n -> e;;
 
 let fac n = downto4 (fun x acc -> x * acc) n 1 // Using accumulator (Folds concept)
 
-let range n = downto4 (fun n acc -> n::acc) (n - 1) [];; // output rang e9 is [7, 8]
+let range g n = downto4 (fun n acc -> (g n)::acc) n []
 
 // 3.4
+let rec double lst = 
+    match lst with 
+    | [] -> []
+    | x::lst -> (x * 2)::(double lst);;
+
+let double_2 lst = List.map (fun x -> x * 2) lst
 
 // 3.5
+let rec stringLength
 
 // 3.6
 
