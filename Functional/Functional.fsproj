@@ -6,10 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Assignment3.fs" />
-    <Compile Include="Assignment2.fs" />
-    <Compile Include="Assignment1.fs" />
+    <None Include="Assignments\Readme.md" />
+    <Compile Include="Assignments\Assignment2.fs" />
+    <Compile Include="Assignments\Assignment3.fs" />
+    <Compile Include="Assignments\Assignment1.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
+
+  <ItemGroup />
 
 </Project>
