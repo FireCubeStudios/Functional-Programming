@@ -6,13 +6,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="Assignments\Readme.md" />
+    <EmbeddedResource Remove="Interpreter\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Assignments\Assignment1.fs" />
     <Compile Include="Assignments\Assignment2.fs" />
     <Compile Include="Assignments\Assignment3.fs" />
-    <Compile Include="Assignments\Assignment1.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Assignments\Readme.md" />
+  </ItemGroup>
 
 </Project>
