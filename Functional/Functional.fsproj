@@ -10,6 +10,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="Rational\Rational.fsi" />
+    <Compile Include="Rational\Rational.fs" />
+    <None Include="Rational\README.md" />
     <Compile Include="Assignments\Assignment1.fs" />
     <Compile Include="Assignments\Assignment2.fs" />
     <Compile Include="Assignments\Assignment3.fs" />
